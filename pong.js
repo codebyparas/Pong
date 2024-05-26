@@ -77,6 +77,11 @@ function update(){
     ball.x += ball.velocityX;
     ball.y += ball.velocityY;
     context.fillRect(ball.x, ball.y, ball.width, ball.height);
+
+    // If Ball Touches Top or Bottom of the Canvas
+    if(ball.y <= 0 || (ball.y + ball.height >= boardHeight)){
+        ball.velocityY *= -1;  // Reverse Direction
+    }
 }
 
 function outOfBounds(yPosition){
