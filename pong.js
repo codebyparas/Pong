@@ -37,6 +37,9 @@ let ball = {
     velocityY : 2
 }
 
+let player1Score = 0;
+let player2Score = 0;
+
 window.onload = function(){
     board= document.getElementById("board");
     board.height = boardHeight;
@@ -95,6 +98,18 @@ function update(){
             ball.velocityX *= -1;  // Flip X Direction
         }
     }
+
+    // Game Over
+    if(ball.x < 0){
+        player2Score++;
+    }else if(ball.x + ballWidth >boardWidth){
+        player1Score++;
+    }
+
+    // Score 
+    context.font = "45px sans-serif";
+    context.fillText(player1Score, boardWidth/5, 45);
+    context.fillText(player2Score, boardWidth*4/5 -45, 45);
 }
 
 function outOfBounds(yPosition){
