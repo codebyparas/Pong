@@ -82,6 +82,19 @@ function update(){
     if(ball.y <= 0 || (ball.y + ball.height >= boardHeight)){
         ball.velocityY *= -1;  // Reverse Direction
     }
+
+    // Bounce the Ball Back
+    if(detectCollision(ball, player1)){
+        if(ball.x <= player1.x + player1.width){
+            // Left Side of Ball Touches Right Side of Player1
+            ball.velocityX *= -1;  // Flip X Direction
+        }
+    }else if(detectCollision(ball, player2)){
+        if(ball.x + ball.width >= player2.x){
+            // Right Side of Ball Touches Left Side of Player2
+            ball.velocityX *= -1;  // Flip X Direction
+        }
+    }
 }
 
 function outOfBounds(yPosition){
@@ -102,4 +115,11 @@ function movePlayer(e){
     }else if(e.code == "ArrowDown"){
         player2.velocityY = 3;
     }
+}
+
+function detectCollision(a, b){
+    return a.x < b.x + b.width &&  // a's Top Left Corner doesnt reach b's Top Right Corner
+           a.x + a.width > b.x &&  // a's Top Right Corner passes b's Top Left Corner
+           a.y < b.y + b.height &&  // a's Top Left Corner doesnt reach b's Bottom Left Corner
+           a.y + a.height > b.y;  // a's Bottom Left Corner passes b's Top Left Corner
 }
