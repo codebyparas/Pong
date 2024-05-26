@@ -32,7 +32,9 @@ let ball = {
     x : boardWidth/2,
     y : boardHeight/2,
     width : ballWidth,
-    height : ballHeight
+    height : ballHeight,
+    velocityX : 1,
+    velocityY : 2
 }
 
 window.onload = function(){
@@ -72,6 +74,8 @@ function update(){
 
     // Ball
     context.fillStyle = "white";
+    ball.x += ball.velocityX;
+    ball.y += ball.velocityY;
     context.fillRect(ball.x, ball.y, ball.width, ball.height);
 }
 
