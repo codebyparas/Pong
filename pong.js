@@ -102,8 +102,10 @@ function update(){
     // Game Over
     if(ball.x < 0){
         player2Score++;
+        resetGame(1);
     }else if(ball.x + ballWidth >boardWidth){
         player1Score++;
+        resetGame(-1);
     }
 
     // Score 
@@ -137,4 +139,15 @@ function detectCollision(a, b){
            a.x + a.width > b.x &&  // a's Top Right Corner passes b's Top Left Corner
            a.y < b.y + b.height &&  // a's Top Left Corner doesnt reach b's Bottom Left Corner
            a.y + a.height > b.y;  // a's Bottom Left Corner passes b's Top Left Corner
+}
+
+function resetGame(direction){
+    ball = {
+        x : boardWidth/2,
+        y : boardHeight/2,
+        width : ballWidth,
+        height : ballHeight,
+        velocityX : direction,
+        velocityY : 2
+    }
 }
